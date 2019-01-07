@@ -1,0 +1,8 @@
+namespace:  microservice.autodevopspipeline-v0
+replicas: 1
+image:
+  registryhost: registry.justmine.com
+  username: justmine
+environment: 
+  upper: Production
+  lower: production

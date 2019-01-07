@@ -1,0 +1,303 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: identity-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: identity
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: identity
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: identity.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: identity.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: identity-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}identity.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: basket-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: basket
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: basket
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: basket.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: basket.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: basket-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}basket.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
+
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: catalog-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: catalog
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: catalog
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: catalog.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: catalog.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: catalog-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}catalog.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
+
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: marketing-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: marketing
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: marketing
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: marketing.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: marketing.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: marketing-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}marketing.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
+
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: ordering-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: ordering
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: ordering
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: ordering.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: ordering.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: ordering-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}ordering.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
+
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: payment-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: payment
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: payment
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: payment.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: payment.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: payment-api
+        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}payment.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthchecks
+            port: 80
+            scheme: HTTP 
+          initialDelaySeconds: 5
+          periodSeconds: 60 
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
