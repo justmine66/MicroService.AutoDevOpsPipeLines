@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <Replicas>1</Replicas>
+    <ImageRegistryHost></ImageRegistryHost>
+    <ImageUserName></ImageUserName>
+  </PropertyGroup>
+</Project>

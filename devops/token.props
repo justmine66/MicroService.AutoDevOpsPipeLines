@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Kubernetes>
+      <AccessToken>
+        <Staging></Staging>
+        <Production></Production>
+      </AccessToken>
+    </Kubernetes>
+  </PropertyGroup>
+</Project>

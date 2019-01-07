@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <AppName>MicroService.AutoDevOpsPipeLine</AppName>
+    <Namespace>microservice-autodevopspipeline</Namespace>
+  </PropertyGroup>
+</Project>
