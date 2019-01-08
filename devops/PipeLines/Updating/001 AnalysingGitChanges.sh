@@ -11,7 +11,7 @@ function AddHeadConfig()
     <NoPublishable>${2}</NoPublishable>" > /tmp/cicd.props
 }
 
-function SyncConfig()
+function AddConfig()
 {
 	# sync config for later retries, not affected by cross-job.
 	declare name=${1}
@@ -70,12 +70,12 @@ else
 	  isPublishable=$(eval echo ${servicePrefix}Publishable)
 	  if [ "${isPublishable}" == "1" ]; 
       then
-		  SyncConfig "${servicePrefix}" "${isPublishable}"
+		  AddConfig "${servicePrefix}" "${isPublishable}"
 		  echo "Tips[Hard Release]: ${servicePrefix} will be released."
       else
 	      # Analyzing git changes
 	      IsPublishable "src/${servicePrefix}" isPublishable publishableCount
-		  SyncConfig "${servicePrefix}" "${isPublishable}"
+		  AddConfig "${servicePrefix}" "${isPublishable}"
 		  echo "Tips[Soft Release]: ${servicePrefix} will be released."
 	  fi
 	done
