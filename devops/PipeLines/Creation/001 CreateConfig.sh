@@ -54,6 +54,7 @@ function Create()
 declare major=($(grep -oP '(?<=VersionMajor>)[^<]+' "devops/version.props"))
 declare namespace=($(grep -oP '(?<=Namespace>)[^<]+' "devops/app.props"))
 declare namespaceOfK8s=$(echo "${namespace}-v${major}" | tr 'A-Z' 'a-z')
+declare k8sApiServer=($(grep -oP '(?<=K8sApiServer>)[^<]+' "devops/deploy.props"))
 
 kubectl create namespace ${namespaceOfK8s}
 
@@ -62,7 +63,7 @@ declare servicePrefix=""
 for service in ${services}
 do
   servicePrefix=($(echo ${service} | awk '{print $9}')) 
-  Create ${Environment} ${namespaceOfK8s} ${BaseUrl} "./src/${servicePrefix}.API" "${servicePrefix}" 
+  Create ${Environment} ${namespaceOfK8s} ${k8sApiServer} "./src/${servicePrefix}.API" "${servicePrefix}" 
 done
 
 echo ""
