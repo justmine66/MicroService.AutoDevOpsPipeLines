@@ -19,11 +19,11 @@ echo ""
 echo "Please check the image version of each microservice carefully !!!"
 echo "kubernetes's namespace: ${namespaceOfK8s}"
 declare services=$(ls -l src/services | awk 'NR>1')
-declare serviceName=""
+declare servicePrefix=""
 for service in ${services}
 do
-  serviceName=($(echo ${service} | awk '{print $9}')) 
-  echo "${serviceName}: ${version}"
+  servicePrefix=($(echo ${service} | awk '{print $9}')) 
+  echo "${servicePrefix}: ${version}"
 done
 
 echo ""
