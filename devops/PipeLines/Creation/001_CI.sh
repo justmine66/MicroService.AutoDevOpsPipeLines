@@ -22,10 +22,10 @@ GetRegistryHost RegistryHost
 for servicePrefix in `ls ./src/Services|xargs -d '/'`
 do
     echo ""
-	echo "Tips: ${servicePrefix} begin integrating to image registry!!!"
-	GetServiceName ${servicePrefix} serviceName
-	GetServiceCsProjFile ${servicePrefix} ${serviceName} serviceCsProjFile
-	CI ${serviceName} ${serviceCsProjFile}
+    echo "Tips: ${servicePrefix} begin integrating to image registry!!!"
+    GetServiceName ${servicePrefix} serviceName
+    GetServiceCsProjFile ${servicePrefix} ${serviceName} serviceCsProjFile
+    CI ${serviceName} ${serviceCsProjFile}
 done
 
 echo ""
