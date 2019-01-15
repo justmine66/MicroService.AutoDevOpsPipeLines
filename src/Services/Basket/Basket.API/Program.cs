@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Basket.API
-{
+{        
     public class Program
     {
         public static void Main(string[] args)
