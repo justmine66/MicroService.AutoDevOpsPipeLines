@@ -1,44 +1,36 @@
 #!/bin/bash
 set -e
+IFS=$'\n\n'
 
 # Import external functions
 chmod +x ./devops/PipeLines/Functions.deploy.sh
 source ./devops/PipeLines/Functions.deploy.sh
 
 # global variable
-RollEnvironmentOf Environment
+ReleaseEnvironmentOf Environment
 
-GetAppName appName
+GetRollBackVersion version
+GetNameSpace namespace
+GetRegistryHost registryHost
+GetImageUserName registryUserName
 
-echo "Continuous deployment[${Environment}] for ${appName} starting..." 
-
-GetCiCdSettings allPublishable noPublishable
-
-if [ "${noPublishable}" == "1" ] ;
+if [ "${AllPublishable}" == "1" ]; 
 then
-    echo ""
-    echo "Tips: No services need to be cded."
+    echo "Tips: All micro-services will be roll-backed, version: ${version}."
+    for servicePrefix in `ls ./src/Services|xargs -d '/'`
+	do
+	  GetServiceName ${servicePrefix} serviceName
+	  CD ${registryHost} ${registryUserName} ${serviceName} ${version} ${namespace}
+	done
 else
-	GetRollBackVersion version
-	GetNameSpace namespace
-	GetRegistryHost registryHost
-	GetImageUserName registryUserName
-
 	for servicePrefix in `ls ./src/Services|xargs -d '/'`
 	do
-	  IsPublishableOf ${servicePrefix} isPublishable
-	  GetServiceName ${servicePrefix} serviceName
+	  DynamicVariableValueOf "${servicePrefix}" "Publishable" isPublishable
 	  if [ "${isPublishable}" == "1" ]; 
-	  then
-		  echo ""
-	      echo "Tips: ${serviceName} begin deployment to K8S!!!"
+      then
+		  echo "Tips: ${servicePrefix} will be roll-backed, version: ${version}."
+		  GetServiceName ${servicePrefix} serviceName
 		  CD ${registryHost} ${registryUserName} ${serviceName} ${version} ${namespace}
-	  else
-	      echo ""
-	      echo "Tips: ${serviceName} will not be deploymented to K8S!!!"
-	  fi 
+	  fi
 	done
 fi
-
-echo ""
-echo "Continuous deployment[${Environment}] for ${appName} has been successful."
