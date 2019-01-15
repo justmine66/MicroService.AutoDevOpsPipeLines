@@ -104,3 +104,21 @@ spec:
     app: auto-devops-pipelines
     component: payment
     type: webapi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: auto-devops-pipelines
+    component: seaching
+  name: seaching-api
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: auto-devops-pipelines
+    component: seaching
+    type: webapi

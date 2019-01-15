@@ -259,3 +259,47 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "{{ .Values.environment.upper }}"
+
+---
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: searching-api
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: auto-devops-pipelines
+      component: searching
+      type: webapi
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: auto-devops-pipelines
+        component: searching
+        type: webapi
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: searching.appsettings.json
+      - name: appsetting-{{ .Values.environment.lower }}
+        configMap:
+          name: searching.appsettings.{{ .Values.environment.lower }}.json
+      containers:
+      - name: searching-api
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/searching.api:{{ .Values.image.version }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/app/appsettings.json"
+          subPath: "appsettings.json"
+        - name: appsetting-{{ .Values.environment.lower }}
+          mountPath: "/app/appsettings.{{ .Values.environment.upper }}.json"
+          subPath: "appsettings.{{ .Values.environment.upper }}.json"
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "{{ .Values.environment.upper }}"
