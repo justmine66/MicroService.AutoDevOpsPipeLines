@@ -1,10 +1,12 @@
-# 清理环境
-参考脚本
+# 脟暮艛铆钮藝啪艂
+藳脦偶藕藵墓膮啪
 ## k8s
 helm delete --purge microservice.autodevopspipeline.v1
+
 kubectl delete namespace microservice-autodevopspipeline-v1
 
 helm delete --purge microservice.autodevopspipeline.v2
+
 kubectl delete namespace microservice-autodevopspipeline-v2
 
 ## gateway
