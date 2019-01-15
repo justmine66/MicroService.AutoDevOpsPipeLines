@@ -33,6 +33,10 @@ function AddTailConfig()
 if [ "${AllPublishable}" == "1" ]; 
 then
     AddHeadConfig "1" "0"
+	for servicePrefix in `ls ./src/Services|xargs -d '/'`
+	do
+	  AddConfig "${servicePrefix}" "1"
+	done
 	AddTailConfig
 
 	echo "All micro-services will be released."
