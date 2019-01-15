@@ -54,6 +54,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcExtensions", "src\BuildingBlocks\Extensions\MvcExtensions\MvcExtensions.csproj", "{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Searching", "Searching", "{2176B42B-AC54-48BE-82F7-104ADEEF2FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Searching.Api", "src\Services\Searching\Searching.Api\Searching.Api.csproj", "{47530BB8-0971-4D51-9EAA-9F74DFF8458D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,10 @@ Global
 		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47530BB8-0971-4D51-9EAA-9F74DFF8458D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47530BB8-0971-4D51-9EAA-9F74DFF8458D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47530BB8-0971-4D51-9EAA-9F74DFF8458D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47530BB8-0971-4D51-9EAA-9F74DFF8458D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{E53A0586-2FB1-4708-91A9-4D6814E02E3C} = {779A24FC-0621-4085-AB80-9BD0BB6AF605}
 		{26EA0840-FACE-4F72-B7D0-64CA9443BD9F} = {E53A0586-2FB1-4708-91A9-4D6814E02E3C}
 		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193} = {26EA0840-FACE-4F72-B7D0-64CA9443BD9F}
+		{2176B42B-AC54-48BE-82F7-104ADEEF2FEF} = {5267E5D9-2B87-4B75-92FD-111624A81E7D}
+		{47530BB8-0971-4D51-9EAA-9F74DFF8458D} = {2176B42B-AC54-48BE-82F7-104ADEEF2FEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94A499F2-8AA4-43FC-9824-F095E42D54AB}
