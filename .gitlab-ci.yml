@@ -1,0 +1,207 @@
+stages:
+  - build
+  # Creation
+  - release-major
+  # Updating
+  - analysing-git-changes
+  - synchronizing-config
+  - ci
+  - cd
+  - is-k8s-ready
+  - testing
+  - clean-k8s
+  # Scaling
+  - auto-scaling
+  # Roll back
+  - roll-back
+
+build_job:
+ stage: build
+ script:
+  - bash ./devops/PipeLines/Build.sh
+ tags:
+  - build
+
+# Creation
+staging_release-major_job:
+  stage: release-major
+  script:
+  - bash ./devops/PipeLines/Creation/Creation_Pipeline.sh
+  only:
+  - release/staging  
+  tags:
+  - staging
+
+prod_release-major_job:
+  stage: release-major
+  script:
+  - bash ./devops/PipeLines/Creation/Creation_Pipeline.sh
+  only:
+  - release/production   
+  tags:
+  - production
+
+# Updating
+staging_analysing-git-changes_job:
+  stage: analysing-git-changes
+  script:
+  - bash ./devops/PipeLines/Updating/001_AnalysingGitChanges.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_synchronizing-config_job:
+  stage: synchronizing-config
+  script:
+  - bash ./devops/PipeLines/Updating/002_SyncConfig.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_ci_job:
+  stage: ci
+  script:
+  - bash ./devops/PipeLines/Updating/003_CI.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_cd_job:
+  stage: cd
+  script:
+  - bash ./devops/PipeLines/Updating/004_CD.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_is-k8s-ready_job:
+  stage: is-k8s-ready
+  script:
+  - bash ./devops/PipeLines/Updating/005_IsK8sReady.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_testing_job:
+  stage: testing
+  script:
+  - bash ./devops/PipeLines/Updating/006_Testing.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+staging_clean-k8s_job:
+  stage: clean-k8s
+  script:
+  - bash ./devops/PipeLines/Updating/007_CleanK8s.sh
+  only:
+  - staging
+  tags:
+  - staging
+
+prod_analysing-git-changes_job:
+  stage: analysing-git-changes
+  script:
+  - bash ./devops/PipeLines/Updating/001_AnalysingGitChanges.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_synchronizing-config_job:
+  stage: synchronizing-config
+  script:
+  - bash ./devops/PipeLines/Updating/002_SyncConfig.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_ci_job:
+  stage: ci
+  script:
+  - bash ./devops/PipeLines/Updating/003_CI.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_cd_job:
+  stage: cd
+  script:
+  - bash ./devops/PipeLines/Updating/004_CD.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_is-k8s-ready_job:
+  stage: is-k8s-ready
+  script:
+  - bash ./devops/PipeLines/Updating/005_IsK8sReady.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_testing_job:
+  stage: testing
+  script:
+  - bash ./devops/PipeLines/Updating/006_Testing.sh
+  only:
+  - master
+  tags:
+  - production
+
+prod_clean-k8s_job:
+  stage: clean-k8s
+  script:
+  - bash ./devops/PipeLines/Updating/007_CleanK8s.sh
+  only:
+  - master
+  tags:
+  - production
+
+# Scaling
+staging_auto¡ªscaling_job:
+  stage: auto-scaling
+  script:
+  - bash ./devops/PipeLines/AutoScaling.sh
+  only:
+  - scaling/staging  
+  tags:
+  - staging
+
+prod_auto-scaling_job:
+  stage: auto-scaling
+  script:
+  - bash ./devops/PipeLines/AutoScaling.sh
+  only:
+  - scaling/production   
+  tags:
+  - production
+
+# Roll-back
+staging_roll-back_job:
+  stage: roll-back
+  script:
+  - bash ./devops/PipeLines/RollBack.sh
+  only:
+  - rollback/staging  
+  tags:
+  - staging
+
+prod_roll-back_job:
+  stage: roll-back
+  script:
+  - bash ./devops/PipeLines/RollBack.sh
+  only:
+  - rollback/production   
+  tags:
+  - production

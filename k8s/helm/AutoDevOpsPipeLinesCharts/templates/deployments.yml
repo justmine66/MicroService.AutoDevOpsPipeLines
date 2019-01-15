@@ -26,17 +26,10 @@ spec:
           name: identity.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: identity-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}identity.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/identity.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"
@@ -76,17 +69,10 @@ spec:
           name: basket.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: basket-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}basket.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/basket.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"
@@ -127,17 +113,10 @@ spec:
           name: catalog.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: catalog-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}catalog.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/catalog.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"
@@ -178,17 +157,10 @@ spec:
           name: marketing.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: marketing-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}marketing.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/marketing.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"
@@ -229,17 +201,10 @@ spec:
           name: ordering.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: ordering-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}ordering.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/ordering.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"
@@ -280,17 +245,10 @@ spec:
           name: payment.appsettings.{{ .Values.environment.lower }}.json
       containers:
       - name: payment-api
-        image: {{ .Values.image.registryhost }}{{ .Values.image.username }}payment.api:{{ .Values.image.version }}
+        image: {{ .Values.image.registryhost }}/{{ .Values.image.username }}/payment.api:{{ .Values.image.version }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthchecks
-            port: 80
-            scheme: HTTP 
-          initialDelaySeconds: 5
-          periodSeconds: 60 
         volumeMounts:
         - name: appsetting
           mountPath: "/app/appsettings.json"

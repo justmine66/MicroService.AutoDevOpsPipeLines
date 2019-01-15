@@ -1,8 +1,9 @@
 <Project>
   <PropertyGroup>
+    <!--Auto-scaling instance number-->
     <Replicas>1</Replicas>
-    <ImageRegistryHost></ImageRegistryHost>
-    <ImageUserName></ImageUserName>
-    <K8sApiServer></K8sApiServer>
+    <!--Rollback step length-->
+    <RollBackStep>1</RollBackStep>
+    <ImageUserName>devopspipelines</ImageUserName>
   </PropertyGroup>
 </Project>

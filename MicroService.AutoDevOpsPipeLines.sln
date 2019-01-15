@@ -5,10 +5,12 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BF6F42B-B1A4-4E7A-BA32-A612F2F8A797}"
 	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
 		devops\app.props = devops\app.props
+		devops\branch.env.props = devops\branch.env.props
+		devops\deploy.production.props = devops\deploy.production.props
 		devops\deploy.props = devops\deploy.props
-		devops\Gateways\kong.props = devops\Gateways\kong.props
-		devops\token.props = devops\token.props
+		devops\deploy.staging.props = devops\deploy.staging.props
 		devops\version.props = devops\version.props
 	EndProjectSection
 EndProject
@@ -30,27 +32,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{45
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{6FD53234-73B6-4A58-8CD8-7B5F4B575D34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "src\Services\Basket\Basket.API\Basket.API.csproj", "{68DE6727-A0CB-4518-B8FD-016D5B841A09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "src\Services\Basket\Basket.API\Basket.API.csproj", "{68DE6727-A0CB-4518-B8FD-016D5B841A09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.API", "src\Services\Catalog\Catalog.API\Catalog.API.csproj", "{C901BCC7-4AE1-418C-8175-A72B74AC3584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "src\Services\Catalog\Catalog.API\Catalog.API.csproj", "{C901BCC7-4AE1-418C-8175-A72B74AC3584}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.API", "src\Services\Identity\Identity.API\Identity.API.csproj", "{394FF665-294F-4847-8E7F-E58F1B142FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "src\Services\Identity\Identity.API\Identity.API.csproj", "{394FF665-294F-4847-8E7F-E58F1B142FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketing.API", "src\Services\Marketing\Marketing.API\Marketing.API.csproj", "{CA029472-5637-4239-9168-AF282D96D859}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.API", "src\Services\Marketing\Marketing.API\Marketing.API.csproj", "{CA029472-5637-4239-9168-AF282D96D859}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.API", "src\Services\Ordering\Ordering.API\Ordering.API.csproj", "{7E09569A-D9D7-4B6B-8B34-DB3C832073E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.API", "src\Services\Ordering\Ordering.API\Ordering.API.csproj", "{7E09569A-D9D7-4B6B-8B34-DB3C832073E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "src\Services\Payment\Payment.API\Payment.API.csproj", "{0178BB26-8B37-4BFF-97AE-764D46593920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.API", "src\Services\Payment\Payment.API\Payment.API.csproj", "{0178BB26-8B37-4BFF-97AE-764D46593920}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesTests", "ServicesTests", "{9F378944-D65E-4FA7-AA34-23BF342112F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest", "test\ServicesTests\IntegrationTest\IntegrationTest.csproj", "{94C559A6-82AA-4149-9616-E6EC78753766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTest", "test\ServicesTests\IntegrationTest\IntegrationTest.csproj", "{94C559A6-82AA-4149-9616-E6EC78753766}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{E53A0586-2FB1-4708-91A9-4D6814E02E3C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{26EA0840-FACE-4F72-B7D0-64CA9443BD9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcExtensions", "src\BuildingBlocks\Extensions\MvcExtensions\MvcExtensions.csproj", "{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcExtensions", "src\BuildingBlocks\Extensions\MvcExtensions\MvcExtensions.csproj", "{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,10 +88,10 @@ Global
 		{94C559A6-82AA-4149-9616-E6EC78753766}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C559A6-82AA-4149-9616-E6EC78753766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C559A6-82AA-4149-9616-E6EC78753766}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,7 +114,7 @@ Global
 		{94C559A6-82AA-4149-9616-E6EC78753766} = {9F378944-D65E-4FA7-AA34-23BF342112F8}
 		{E53A0586-2FB1-4708-91A9-4D6814E02E3C} = {779A24FC-0621-4085-AB80-9BD0BB6AF605}
 		{26EA0840-FACE-4F72-B7D0-64CA9443BD9F} = {E53A0586-2FB1-4708-91A9-4D6814E02E3C}
-		{8E88AA1F-8D4F-4FA6-9B94-03203BB5F739} = {26EA0840-FACE-4F72-B7D0-64CA9443BD9F}
+		{2FFD7AC6-1A55-4B6E-BF9D-1B85CC5AE193} = {26EA0840-FACE-4F72-B7D0-64CA9443BD9F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94A499F2-8AA4-43FC-9824-F095E42D54AB}

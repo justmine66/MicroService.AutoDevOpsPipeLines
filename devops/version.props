@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
-    <Major>0</Major>
+    <Major>1</Major>
     <Minor>0</Minor>
-    <Patch>1</Patch>
+    <Patch>0</Patch>
   </PropertyGroup>
 </Project>

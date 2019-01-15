@@ -2,6 +2,10 @@
 set -e
 IFS=$'\n\n'
 
+# Import external functions
+chmod +x ./devops/PipeLines/Functions.common.sh
+source ./devops/PipeLines/Functions.common.sh
+
 function AddHeadConfig()
 {
 	# sync config for later retries, not affected by cross-job.
@@ -17,9 +21,7 @@ function AddConfig()
 	declare name=${1}
 	declare publishable=${2}
 
-	if [ "${publishable}" == "1" ]; then
-	    echo "<${name}Publishable>${publishable}</${name}Publishable>" >> /tmp/cicd.props
-	fi 
+	echo "<${name}Publishable>${publishable}</${name}Publishable>" >> /tmp/cicd.props
 }
 
 function AddTailConfig()
@@ -30,7 +32,7 @@ function AddTailConfig()
 
 if [ "${AllPublishable}" == "1" ]; 
 then
-    AddHeadConfig "1","0"
+    AddHeadConfig "1" "0"
 	AddTailConfig
 
 	echo "All micro-services will be released."
@@ -57,34 +59,34 @@ else
 		fi
 	}
 	
-	declare services=$(ls -l src/services | awk 'NR>1')
-	declare servicePrefix=""
 	declare isPublishable
 	declare publishableCount=0;
 
-	AddHeadConfig "1","0"
-	for service in ${services}
+	AddHeadConfig "0" "0"
+	for servicePrefix in `ls ./src/Services|xargs -d '/'`
 	do
-	  servicePrefix=($(echo ${service} | awk '{print $9}')) 
-	  # Notes: manual control, mandatory release, will not analyzing changes
-	  isPublishable=$(eval echo ${servicePrefix}Publishable)
+	  # Notes: Hard release[manual control], will not analyz changes.
+	  DynamicVariableValueOf "${servicePrefix}" "Publishable" isPublishable
 	  if [ "${isPublishable}" == "1" ]; 
       then
 		  AddConfig "${servicePrefix}" "${isPublishable}"
 		  echo "Tips[Hard Release]: ${servicePrefix} will be released."
       else
-	      # Analyzing git changes
-	      IsPublishable "src/${servicePrefix}" isPublishable publishableCount
-		  AddConfig "${servicePrefix}" "${isPublishable}"
-		  echo "Tips[Soft Release]: ${servicePrefix} will be released."
+	      # Soft Release, begin Analyzing git changes
+	      IsPublishable "src/Services/${servicePrefix}" isPublishable publishableCount
+		  if [ "${isPublishable}" == "1" ]; 
+          then
+		      AddConfig "${servicePrefix}" "${isPublishable}"
+		      echo "Tips[Soft Release]: ${servicePrefix} will be released."
+		  fi
 	  fi
 	done
 	AddTailConfig
 
-	declare serviceCount=$(ls -l src/services | grep "^d" | wc -l)
+	declare serviceCount=$(ls -l src/Services | grep "^d" | wc -l)
 	if [ "${publishableCount}" == "${serviceCount}" ] ;
 	then
-		AddHeadConfig "0","1"
+		AddHeadConfig "0" "1"
 		AddTailConfig
 		echo "Tips: No services need to be released."
 	fi

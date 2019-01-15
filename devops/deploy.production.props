@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <RegistryHost>registry.prod.com:8100</RegistryHost>
+    <K8sApiServer>https://192.168.3.110:6443</K8sApiServer>
+    <KongApiServer>http://192.168.3.110:81</KongApiServer>
+    <KongRouteDomain>prod.devops.com</KongRouteDomain>
+    <AccessToken>ueeytryeey.gsdfgsdgsdgsd.gdfsgsdgsds</AccessToken>
+  </PropertyGroup>
+</Project>

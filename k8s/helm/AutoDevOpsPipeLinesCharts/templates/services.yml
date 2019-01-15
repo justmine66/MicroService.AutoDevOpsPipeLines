@@ -2,24 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
-    component: common
-  name: common-api
-  namespace: {{ .Values.namespace }}
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-  selector:
-    app: light
-    component: common
-    type: webapi
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: light
+    app: auto-devops-pipelines
     component: basket
   name: basket-api
   namespace: {{ .Values.namespace }}
@@ -28,7 +11,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: basket
     type: webapi
 
@@ -37,7 +20,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
+    app: auto-devops-pipelines
     component: catalog
   name: catalog-api
   namespace: {{ .Values.namespace }}
@@ -46,7 +29,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: catalog
     type: webapi
 
@@ -55,7 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
+    app: auto-devops-pipelines
     component: identity
   name: identity-api
   namespace: {{ .Values.namespace }}
@@ -64,7 +47,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: identity
     type: webapi
 
@@ -73,7 +56,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
+    app: auto-devops-pipelines
     component: marketing
   name: marketing-api
   namespace: {{ .Values.namespace }}
@@ -82,7 +65,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: marketing
     type: webapi
 
@@ -91,7 +74,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
+    app: auto-devops-pipelines
     component: ordering
   name: ordering-api
   namespace: {{ .Values.namespace }}
@@ -100,7 +83,7 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: ordering
     type: webapi
 
@@ -109,7 +92,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: light
+    app: auto-devops-pipelines
     component: payment
   name: payment-api
   namespace: {{ .Values.namespace }}
@@ -118,43 +101,6 @@ spec:
   ports:
   - port: 80
   selector:
-    app: light
+    app: auto-devops-pipelines
     component: payment
-    type: webapi
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: light
-    component: searching
-  name: searching-yu
-  namespace: {{ .Values.namespace }}
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-  selector:
-    app: light
-    component: searching
-    type: webapi
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: light
-    role: aggregation
-    component: light
-  name: aggregation-light
-  namespace: {{ .Values.namespace }}
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-  selector:
-    app: light
-    role: aggregation
-    component: light
     type: webapi

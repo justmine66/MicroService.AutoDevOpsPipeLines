@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <RegistryHost>registry.staging.com:8100</RegistryHost>
+    <K8sApiServer>https://192.168.2.110:6443</K8sApiServer>
+    <KongApiServer>http://192.168.2.110:81</KongApiServer>
+    <KongRouteDomain>staging.devops.com</KongRouteDomain>
+<AccessToken>utyeyerye.ytryeryeryyyyyyr.jhddghdhdhdhd</AccessToken>
+  </PropertyGroup>
+</Project>
