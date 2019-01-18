@@ -31,36 +31,36 @@ function CI()
 
 function CD()
 {
-	declare registryHost=$1
-	declare registryUserName=$2
-	declare serviceName=$3
-	declare version=$4
-	declare namespace=$5
-	Replace ${serviceName} '.' '-' appName
+    declare registryHost=$1
+    declare registryUserName=$2
+    declare serviceName=$3
+    declare version=$4
+    declare namespace=$5
+    Replace ${serviceName} '.' '-' appName
 
-	# repository name must be lowercase
-	ToLower "${registryHost}/${registryUserName}/${serviceName}:${version}" imagefullname
-	ToLower ${appName} appNameOfK8s
+    # repository name must be lowercase
+    ToLower "${registryHost}/${registryUserName}/${serviceName}:${version}" imagefullname
+    ToLower ${appName} appNameOfK8s
 
-	# echo "Tips: namespace: ${namespace}, appNameOfK8s: ${appNameOfK8s}, imagefullname: ${imagefullname}"
-	kubectl -n ${namespace} set image deployments/${appNameOfK8s} "${appNameOfK8s}=${imagefullname}"
-	# [compatible]Staging environment does not need to change version number.
-	if [ "${Environment}" == "Staging" ]; then
-		kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=0; 
-		kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=1; 
-	fi
-	echo "Deployment[${Environment}] for ${appName}:${version} has been successful."
+    # echo "Tips: namespace: ${namespace}, appNameOfK8s: ${appNameOfK8s}, imagefullname: ${imagefullname}"
+    kubectl -n ${namespace} set image deployments/${appNameOfK8s} "${appNameOfK8s}=${imagefullname}"
+    # [compatible]Staging environment does not need to change version number.
+    if [ "${Environment}" == "Staging" ]; then
+	    kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=0; 
+	    kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=1; 
+    fi
+    echo "Deployment[${Environment}] for ${appName}:${version} has been successful."
 }
 
 function AutoScaling()
 {
-	declare namespace=$1
-	declare serviceName=$2
-	declare replicas=$3
-	Replace ${serviceName} '.' '-' appName
+    declare namespace=$1
+    declare serviceName=$2
+    declare replicas=$3
+    Replace ${serviceName} '.' '-' appName
 
-	# repository name must be lowercase
-	ToLower ${appName} appNameOfK8s
+    # repository name must be lowercase
+    ToLower ${appName} appNameOfK8s
 
-	kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=${replicas}; 
+    kubectl -n ${namespace} scale deploy ${appNameOfK8s} --replicas=${replicas}; 
 }
