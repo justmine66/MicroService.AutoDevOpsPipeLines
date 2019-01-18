@@ -10,23 +10,23 @@ function CI()
 {
     declare serviceName=$1
     declare publishFile=$2
-	declare publishOutputDir="/tmp/${serviceName}"
+    declare publishOutputDir="/tmp/${serviceName}"
 
-	GetVersion version
-	GetImageUserName registryUserName
+    GetVersion version
+    GetImageUserName registryUserName
 
-	# repository name must be lowercase
-	ToLower "${RegistryHost}/${registryUserName}/${serviceName}:${version}" imagefullname
+    # repository name must be lowercase
+    ToLower "${RegistryHost}/${registryUserName}/${serviceName}:${version}" imagefullname
 	
-	echo ""
-	echo "Begin delivering for ${serviceName}..."
-	echo "Tips: Image full name: ${imagefullname}"
-	mkdir -p ${publishOutputDir}
-	dotnet publish ${publishFile} -o ${publishOutputDir} -c release --no-restore  
-	docker build -t ${imagefullname} ${publishOutputDir}
-	docker push ${imagefullname}
-	rm -fr ${publishOutputDir}
-	echo "Delivery for ${serviceName} has been successful."
+    echo ""
+    echo "Begin delivering for ${serviceName}..."
+    echo "Tips: Image full name: ${imagefullname}"
+    mkdir -p ${publishOutputDir}
+    dotnet publish ${publishFile} -o ${publishOutputDir} -c release --no-restore  
+    docker build -t ${imagefullname} ${publishOutputDir}
+    docker push ${imagefullname}
+    rm -fr ${publishOutputDir}
+    echo "Delivery for ${serviceName} has been successful."
 }
 
 function CD()
