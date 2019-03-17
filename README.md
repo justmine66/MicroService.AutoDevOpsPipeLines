@@ -7,7 +7,7 @@ Build a mature and stable automated DevOps pipeline with minimum learning cost, 
 或者加入QQ群：564095699，一起探讨微服务落地k8s的方方面面。
 
 下面的测试几乎涵盖了结合k8s管理应用程序生命周期的所有流程(部署、伸缩、回滚、发布)：
-![](devops.jpg)
+![](devops.pipeline.jpg)
 
 
 
